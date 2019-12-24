@@ -2,7 +2,7 @@
 
 # stm32WindowSensor
 
-* RF window sensors: STM32L + RFM69 + Android
+*RF window sensors: STM32L + RFM69 + Android*
 
 This is a DIY windows monitorig system that consist of:
 - A window sensor based on STM32L051 MCU and RFM69 RF module. The PCB is developed in EagleCad, firmware written in C++ using System Workbench for STM32
