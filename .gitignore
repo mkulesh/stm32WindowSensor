@@ -1,0 +1,16 @@
+doc/
+images/prototypes/
+keystore/
+src/.cproject
+src/.project
+src/.settings/
+src/Release/
+zNetMonitor/.gradle/
+zNetMonitor/.idea/
+zNetMonitor/server/build/
+zNetMonitor/app/build/
+zNetMonitor/build/
+zNetMonitor/common/build/
+zNetMonitor/local.properties
+
+
