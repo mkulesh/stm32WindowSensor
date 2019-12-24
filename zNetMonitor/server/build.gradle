@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+version = '1.2'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task createJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'zNetServer',
+                'Implementation-Version': version,
+                'Main-Class': 'com.mkulesh.znet.Application'
+    }
+    baseName = 'znet-server'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task copyJar(type: Copy) {
+    from createJar // shortcut for createJar.outputs.files
+    into "${buildDir}/../../release"
+}
+
+task buildServer(dependsOn: [clean, copyJar])
+
+dependencies {
+    compile project(':common')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

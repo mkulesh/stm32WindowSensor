@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/infobar_view"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/activity_infobar_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/panel_background_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp">
+
+        <TextView
+            android:id="@+id/server_state"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textColor="@color/panel_text_color"
+            android:textSize="@dimen/panel_text_size" />
+
+        <TextView
+            android:id="@+id/sensors_state"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:textColor="@color/panel_text_color"
+            android:textSize="@dimen/panel_text_size" />
+    </LinearLayout>
+
+</merge>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Znet Monitor</string>
+    <string name="title_section1">Floor 1</string>
+    <string name="title_section2">Floor 2</string>
+    <string name="title_section3">Server</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_button_connect">Connect</string>
+
+    <string name="error_connection_failed">Can not connect to %s</string>
+    <string name="error_connection_timeout">server not found</string>
+    <string name="error_file_read">Can not open file %s</string>
+    <string name="error_out_of_memory">Not enough memory for plot visualization</string>
+
+    <string name="sensors_alarm">Alarm</string>
+    <string name="sensors_warning">Warning</string>
+    <string name="sensors_ok">OK</string>
+
+    <string name="warning_no_activity">No signal</string>
+    <string name="warning_not_ready">Not ready</string>
+    <string name="warning_cover_opened">Cover opened</string>
+    <string name="warning_sensor_reseted">Sensor reseted</string>
+    <string name="warning_low_battery">Low battery</string>
+    <string name="warning_unknown_message">Unknown message</string>
+    <string name="warning_sensor_disconnected">Sensor disconnected</string>
+</resources>

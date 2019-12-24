@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "com.mkulesh.znet"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 2
+        versionName "1.1"
+        setProperty("archivesBaseName", "znet-monitor-" + versionName)
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation 'com.android.support:support-v13:27.1.1'
+}
