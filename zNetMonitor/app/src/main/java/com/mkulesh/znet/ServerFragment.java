@@ -25,6 +25,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 public class ServerFragment extends BaseFragment implements View.OnClickListener
 {
     public ServerFragment()
@@ -33,7 +35,7 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         initializeFragment(inflater, container, R.layout.server_fragment);
 

@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.mkulesh.znet.common.DeviceState;
 
+import androidx.annotation.NonNull;
+
 @SuppressLint("ClickableViewAccessibility")
 public class FloorFragment extends BaseFragment implements OnTouchListener
 {
@@ -62,7 +64,7 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         initializeFragment(inflater, container, R.layout.floor_fragment);
         floorNr = (fragmentNumber == 0) ? FloorNr.FIRST : FloorNr.SECOND;

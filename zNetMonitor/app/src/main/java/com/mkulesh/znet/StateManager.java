@@ -25,17 +25,20 @@ import com.mkulesh.znet.common.Message;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import androidx.annotation.NonNull;
+
 public class StateManager
 {
     @SuppressLint("UseSparseArrays")
-    private final HashMap<Integer, DeviceState> devices = new HashMap<Integer, DeviceState>();
-    private final ArrayList<Pair<String, String>> serverState = new ArrayList<Pair<String, String>>();
+    private final HashMap<Integer, DeviceState> devices = new HashMap<>();
+    private final ArrayList<Pair<String, String>> serverState = new ArrayList<>();
 
     public StateManager()
     {
         // empty
     }
 
+    @NonNull
     public String toString()
     {
         String res = "";
@@ -162,7 +165,7 @@ public class StateManager
         serverState.clear();
         for (int i = 0; i < Message.Type.SERVER_STATE.getParNumber(); i += 2)
         {
-            serverState.add(new Pair<String, String>(m.getParameter(i), m.getParameter(i + 1)));
+            serverState.add(new Pair<>(m.getParameter(i), m.getParameter(i + 1)));
         }
     }
 }
