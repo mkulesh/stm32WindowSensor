@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.mkulesh.znet"
         minSdkVersion 14
-        targetSdkVersion 27
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 29
+        versionCode 3
+        versionName "1.2"
         setProperty("archivesBaseName", "znet-monitor-" + versionName)
     }
 
@@ -23,5 +23,5 @@ android {
 
 dependencies {
     implementation project(':common')
-    implementation 'com.android.support:support-v13:27.1.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }

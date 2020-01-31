@@ -16,7 +16,6 @@
 package com.mkulesh.znet;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -29,6 +28,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.Locale;
+
+import androidx.fragment.app.Fragment;
 
 abstract public class BaseFragment extends Fragment
 {

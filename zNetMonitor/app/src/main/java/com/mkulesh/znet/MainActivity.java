@@ -15,30 +15,24 @@
 
 package com.mkulesh.znet;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v13.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 
 import com.mkulesh.znet.common.DeviceState;
 import com.mkulesh.znet.common.Message;
 
-import java.util.Locale;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 public class MainActivity extends FragmentActivity implements OnPageChangeListener
 {
-    SectionsPagerAdapter pagerAdapter;
+    MainPagerAdapter pagerAdapter;
     ViewPager viewPager;
     CommunicationTask communicationThread = null;
     private final StateManager stateManager = new StateManager();
@@ -47,16 +41,30 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        initGUI();
+    }
+
+    void initGUI()
+    {
         setContentView(R.layout.activity_main);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        pagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        pagerAdapter = new MainPagerAdapter(this, getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = findViewById(R.id.pager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull android.content.res.Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        int page = viewPager.getCurrentItem();
+        initGUI();
+        viewPager.setCurrentItem(page);
     }
 
     @Override
@@ -79,87 +87,6 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter
-    {
-        private SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
-
-        public SectionsPagerAdapter(FragmentManager fm)
-        {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position)
-        {
-            Fragment fragment = null;
-            switch (position)
-            {
-            case 0:
-                fragment = new FloorFragment();
-                break;
-            case 1:
-                fragment = new FloorFragment();
-                break;
-            case 2:
-                fragment = new ServerFragment();
-                break;
-            }
-            Bundle args = new Bundle();
-            args.putInt(BaseFragment.FRAGMENT_NUMBER, position);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public int getCount()
-        {
-            // Show 3 total pages.
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position)
-        {
-            Locale l = Locale.getDefault();
-            switch (position)
-            {
-            case 0:
-                return getString(R.string.title_section1).toUpperCase(l);
-            case 1:
-                return getString(R.string.title_section2).toUpperCase(l);
-            case 2:
-                return getString(R.string.title_section3).toUpperCase(l);
-            }
-            return null;
-        }
-
-        // Register the fragment when the item is instantiated
-        @Override
-        public Object instantiateItem(ViewGroup container, int position)
-        {
-            Fragment fragment = (Fragment) super.instantiateItem(container, position);
-            registeredFragments.put(position, fragment);
-            return fragment;
-        }
-
-        // Unregister when the item is inactive
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object)
-        {
-            registeredFragments.remove(position);
-            super.destroyItem(container, position, object);
-        }
-
-        // Returns the fragment for the position (if instantiated)
-        public Fragment getRegisteredFragment(int position)
-        {
-            return registeredFragments.get(position);
-        }
     }
 
     public boolean connectToServer(String server, int port)
