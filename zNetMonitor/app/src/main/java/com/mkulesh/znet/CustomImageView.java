@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+@SuppressLint("AppCompatCustomView")
 public class CustomImageView extends TextView
 {
     public static final String ASSET_LINK_OBJECT = "content:com.mkulesh.znet.asset.";

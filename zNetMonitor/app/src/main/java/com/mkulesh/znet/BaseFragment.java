@@ -63,6 +63,7 @@ abstract public class BaseFragment extends Fragment
         sensorsState = rootView.findViewById(R.id.sensors_state);
     }
 
+    @SuppressLint("SetTextI18n")
     public void update()
     {
         Drawable icon1 = null, icon2 = null;

@@ -15,6 +15,7 @@
 
 package com.mkulesh.znet;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Pair;
@@ -34,6 +35,7 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
         // Empty constructor required for fragment subclasses
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
