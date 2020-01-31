@@ -36,6 +36,7 @@ import java.nio.charset.Charset;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.crypto.KeyGenerator;
 
@@ -45,22 +46,23 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
     private static final int BASE64_OPTIONS = Base64.NO_WRAP | Base64.NO_PADDING;
 
     private final MainActivity activity;
-    private Boolean connected = false, reportIfStopped = false;
+    private final AtomicBoolean connected = new AtomicBoolean(false);
+    private Boolean reportIfStopped = false;
     private SocketChannel socket = null;
     private String inputStream = "";
     private final AdvancedEncryptionStandard initialEncryptor = new AdvancedEncryptionStandard(Message.AES_KEY);
     private AdvancedEncryptionStandard sessionEncryptor = null;
 
-    public CommunicationTask(MainActivity activity)
+    CommunicationTask(MainActivity activity)
     {
         this.activity = activity;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
 
-    public boolean connectToServer(String server, int port)
+    boolean connectToServer(String server, int port)
     {
-        final String addr = server + ":" + Integer.toString(port);
+        final String addr = server + ":" + port;
         try
         {
             socket = SocketChannel.open();
@@ -75,7 +77,7 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
                     throw new Exception(activity.getResources().getString(R.string.error_connection_timeout));
                 }
             }
-            connected = true;
+            connected.set(true);
         }
         catch (Exception e)
         {
@@ -86,26 +88,20 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
             {
                 Logging.info(this, t.toString());
             }
-            connected = false;
+            connected.set(false);
         }
         reportIfStopped = false;
-        return connected;
+        return connected.get();
     }
 
-    public void disconnect()
+    void disconnect()
     {
-        synchronized (connected)
-        {
-            connected = false;
-        }
+        connected.set(false);
     }
 
-    public boolean isConnected()
+    boolean isConnected()
     {
-        synchronized (connected)
-        {
-            return connected;
-        }
+        return connected.get();
     }
 
     @Override
@@ -120,13 +116,10 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
             {
                 try
                 {
-                    synchronized (connected)
+                    if (!connected.get() || isCancelled())
                     {
-                        if (!connected || isCancelled())
-                        {
-                            Logging.info(this, "cancelled");
-                            break;
-                        }
+                        Logging.info(this, "cancelled");
+                        break;
                     }
 
                     buffer.clear();
@@ -159,10 +152,7 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
         {
             // nothing to do
         }
-        synchronized (connected)
-        {
-            connected = false;
-        }
+        connected.set(false);
         Logging.info(this, "stopped");
         return null;
     }
