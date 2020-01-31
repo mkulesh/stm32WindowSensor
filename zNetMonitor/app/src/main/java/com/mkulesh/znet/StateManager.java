@@ -33,7 +33,7 @@ public class StateManager
     private final HashMap<Integer, DeviceState> devices = new HashMap<>();
     private final ArrayList<Pair<String, String>> serverState = new ArrayList<>();
 
-    public StateManager()
+    StateManager()
     {
         // empty
     }
@@ -53,17 +53,17 @@ public class StateManager
         return res;
     }
 
-    public HashMap<Integer, DeviceState> getDevices()
+    HashMap<Integer, DeviceState> getDevices()
     {
         return devices;
     }
 
-    public ArrayList<Pair<String, String>> getServerState()
+    ArrayList<Pair<String, String>> getServerState()
     {
         return serverState;
     }
 
-    public void handleMessage(Message m)
+    void handleMessage(Message m)
     {
         switch (m.getType())
         {
@@ -87,7 +87,7 @@ public class StateManager
         }
     }
 
-    public boolean isAlarm()
+    boolean isAlarm()
     {
         for (DeviceState s : devices.values())
         {
@@ -99,7 +99,7 @@ public class StateManager
         return false;
     }
 
-    public boolean isWarning()
+    boolean isWarning()
     {
         for (DeviceState s : devices.values())
         {
