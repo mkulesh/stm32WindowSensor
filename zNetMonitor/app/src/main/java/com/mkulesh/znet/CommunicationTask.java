@@ -39,9 +39,9 @@ import java.util.Calendar;
 
 import javax.crypto.KeyGenerator;
 
-public class CommunicationTask extends AsyncTask<Void, Message, Void>
+class CommunicationTask extends AsyncTask<Void, Message, Void>
 {
-    public static final long CONNECTION_TIMEOUT = 5000;
+    private static final long CONNECTION_TIMEOUT = 5000;
     private static final int BASE64_OPTIONS = Base64.NO_WRAP | Base64.NO_PADDING;
 
     private final MainActivity activity;

@@ -40,10 +40,10 @@ abstract public class BaseFragment extends Fragment
     public static final String SERVER_NAME = "server_name";
     public static final String SERVER_PORT = "server_port";
 
-    protected MainActivity activity;
-    protected SharedPreferences preferences;
-    protected View rootView = null;
-    protected int fragmentNumber = -1;
+    MainActivity activity;
+    SharedPreferences preferences;
+    View rootView = null;
+    int fragmentNumber = -1;
 
     private TextView serverState, sensorsState;
 
@@ -52,7 +52,7 @@ abstract public class BaseFragment extends Fragment
         // Empty constructor required for fragment subclasses
     }
 
-    public void initializeFragment(LayoutInflater inflater, ViewGroup container, int layoutId)
+    void initializeFragment(LayoutInflater inflater, ViewGroup container, int layoutId)
     {
         activity = (MainActivity) getActivity();
         preferences = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -102,7 +102,7 @@ abstract public class BaseFragment extends Fragment
 
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
-    public static Drawable getDrawable(Context context, int icon)
+    private static Drawable getDrawable(Context context, int icon)
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {

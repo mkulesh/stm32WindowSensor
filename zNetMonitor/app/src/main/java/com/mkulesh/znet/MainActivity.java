@@ -32,9 +32,9 @@ import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 public class MainActivity extends FragmentActivity implements OnPageChangeListener
 {
-    MainPagerAdapter pagerAdapter;
-    ViewPager viewPager;
-    CommunicationTask communicationThread = null;
+    private MainPagerAdapter pagerAdapter;
+    private ViewPager viewPager;
+    private CommunicationTask communicationThread = null;
     private final StateManager stateManager = new StateManager();
 
     @Override
@@ -44,7 +44,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
         initGUI();
     }
 
-    void initGUI()
+    private void initGUI()
     {
         setContentView(R.layout.activity_main);
 

@@ -16,7 +16,7 @@
 package com.mkulesh.znet;
 
 
-public final class Logging
+final class Logging
 {
     public static void info(Object o, String text)
     {

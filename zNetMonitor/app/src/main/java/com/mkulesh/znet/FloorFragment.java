@@ -41,12 +41,12 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
 
         private final int id;
 
-        private FloorNr(int id)
+        FloorNr(int id)
         {
             this.id = id;
         }
 
-        public int getId()
+        private int getId()
         {
             return id;
         }

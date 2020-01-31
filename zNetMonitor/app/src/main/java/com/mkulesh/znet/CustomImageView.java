@@ -56,7 +56,7 @@ public class CustomImageView extends TextView
     private SVG svg = null;
     private final RectF rect = new RectF();
     private int originalWidth = 0, originalHeight = 0;
-    protected final Paint paint = new Paint();
+    private final Paint paint = new Paint();
 
     /*********************************************************
      * Creating
@@ -75,11 +75,6 @@ public class CustomImageView extends TextView
     public CustomImageView(Context context, AttributeSet attrs, int defStyle)
     {
         super(context, attrs, defStyle);
-    }
-
-    public ImageType getImageType()
-    {
-        return imageType;
     }
 
     public Bitmap getBitmap()
