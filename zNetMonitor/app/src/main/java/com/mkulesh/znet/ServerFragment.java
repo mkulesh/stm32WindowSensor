@@ -37,7 +37,7 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
     {
         initializeFragment(inflater, container, R.layout.server_fragment);
 
-        final Button buttonServerConnect = (Button) rootView.findViewById(R.id.button_server_connect);
+        final Button buttonServerConnect = rootView.findViewById(R.id.button_server_connect);
         buttonServerConnect.setOnClickListener(this);
 
         ((EditText) rootView.findViewById(R.id.field_server_name)).setText(preferences.getString(
@@ -63,7 +63,7 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
                 SharedPreferences.Editor prefEditor = preferences.edit();
                 prefEditor.putString(SERVER_NAME, serverName);
                 prefEditor.putInt(SERVER_PORT, serverPort);
-                prefEditor.commit();
+                prefEditor.apply();
             }
         }
     }
@@ -75,8 +75,8 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
         int line = 1;
         for (Pair<String, String> e : activity.getStateManager().getServerState())
         {
-            ((TextView) rootView.findViewWithTag("SERVER_STATE_KEY_" + Integer.toString(line))).setText(e.first);
-            ((TextView) rootView.findViewWithTag("SERVER_STATE_VALUE_" + Integer.toString(line))).setText(e.second);
+            ((TextView) rootView.findViewWithTag("SERVER_STATE_KEY_" + line)).setText(e.first);
+            ((TextView) rootView.findViewWithTag("SERVER_STATE_VALUE_" + line)).setText(e.second);
             line++;
         }
     }

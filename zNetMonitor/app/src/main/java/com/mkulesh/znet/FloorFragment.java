@@ -67,10 +67,10 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
         initializeFragment(inflater, container, R.layout.floor_fragment);
         floorNr = (fragmentNumber == 0) ? FloorNr.FIRST : FloorNr.SECOND;
 
-        imageLayout = (RelativeLayout) rootView.findViewById(R.id.image_layout);
+        imageLayout = rootView.findViewById(R.id.image_layout);
         imageLayout.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
-        CustomImageView backgroundView = (CustomImageView) imageLayout.findViewById(R.id.background_view);
+        CustomImageView backgroundView = imageLayout.findViewById(R.id.background_view);
         final String imageName = "floor_" + floorNr.getId() + "_background";
         backgroundView.loadImage(null, CustomImageView.ASSET_LINK_OBJECT + imageName + ".svg");
         backgroundView.setTag(imageName);
@@ -105,7 +105,7 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
 
     private void setImageVsability(String imageName, boolean visible)
     {
-        CustomImageView image = (CustomImageView) imageLayout.findViewWithTag(imageName);
+        CustomImageView image = imageLayout.findViewWithTag(imageName);
         if (image == null && !visible)
         {
             // nothing to do
@@ -165,7 +165,7 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
         {
             return null;
         }
-        String message = "№" + Integer.toString(d.getId());
+        String message = "№" + d.getId();
         if (!d.getAlarmTime().isEmpty())
         {
             message += ": " + d.getAlarmTime();

@@ -59,8 +59,8 @@ abstract public class BaseFragment extends Fragment
         rootView = inflater.inflate(layoutId, container, false);
         Bundle args = getArguments();
         fragmentNumber = args.getInt(FRAGMENT_NUMBER);
-        serverState = (TextView) rootView.findViewById(R.id.server_state);
-        sensorsState = (TextView) rootView.findViewById(R.id.sensors_state);
+        serverState = rootView.findViewById(R.id.server_state);
+        sensorsState = rootView.findViewById(R.id.sensors_state);
     }
 
     public void update()

@@ -116,7 +116,7 @@ public class StateManager
             DeviceState s = new DeviceState(new DeviceConfig(m));
             if (devices.containsKey(s.getId()))
             {
-                throw new Exception("multiply configuration for device id #" + Integer.toString(s.getId()));
+                throw new Exception("multiply configuration for device id #" + s.getId());
             }
             devices.put(s.getId(), s);
         }
