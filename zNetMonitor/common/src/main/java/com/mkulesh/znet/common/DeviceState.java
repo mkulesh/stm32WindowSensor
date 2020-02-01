@@ -26,29 +26,25 @@ public class DeviceState
     {
         NO_ACTIVITY,
         NOT_READY,
-        COVER_OPENED,
-        SENSOR_RESETED,
         LOW_BATTERY,
-        UNKNOWN_MESSAGE,
-        SENSOR_DISCONNECTED
+        UNKNOWN_MESSAGE
     }
 
     private final DeviceConfig config;
     private boolean alarm = false;
     private final ArrayList<Warning> warnings = new ArrayList<>();
-    private long lastChangeTime;
+    private String batteryState = "";
     private String alarmTime = "";
     private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.US);
 
     public DeviceState(DeviceConfig config)
     {
         this.config = config;
-        this.lastChangeTime = System.currentTimeMillis();
     }
 
     public String toString()
     {
-        String res = "#" + Integer.toString(getId()) + ": ";
+        String res = "#" + getId() + ": ";
         if (isAlarm() || isWarning())
         {
             if (isAlarm())
@@ -97,11 +93,6 @@ public class DeviceState
         return alarmTime;
     }
 
-    public long getLastChangeTime()
-    {
-        return lastChangeTime;
-    }
-
     public boolean setAlarm(boolean alarm)
     {
         boolean changed = this.alarm != alarm;
@@ -111,6 +102,16 @@ public class DeviceState
             alarmTime = isAlarm() ? timeFormat.format(new Date(System.currentTimeMillis())) : "";
         }
         return changed;
+    }
+
+    public String getBatteryState()
+    {
+        return batteryState;
+    }
+
+    public void setBatteryState(String batteryState)
+    {
+        this.batteryState = batteryState;
     }
 
     public boolean setWarning(Warning warning, boolean value)
@@ -129,33 +130,24 @@ public class DeviceState
         return changed;
     }
 
-    public boolean clearWarnings()
-    {
-        boolean changed = !warnings.isEmpty();
-        warnings.clear();
-        return changed;
-    }
-
-    public void setLastChangeTime(long lastChangeTime)
-    {
-        this.lastChangeTime = lastChangeTime;
-    }
-
     public Message getDeviceStateMsg()
     {
         Message m = new Message(Message.Type.DEVICE_STATE);
         m.addParameter(Integer.toString(getId()));
         m.addParameter(Boolean.toString(alarm));
-        m.addParameter(warnings.toString());
         m.addParameter(alarmTime);
+        m.addParameter(batteryState);
+        m.addParameter(warnings.toString());
         return m;
     }
 
     public void updateFromMessage(Message m)
     {
         alarm = Boolean.valueOf(m.getParameter(1));
+        alarmTime = m.getParameter(2);
+        batteryState = m.getParameter(3);
         warnings.clear();
-        final String warningsStr = m.getParameter(2);
+        final String warningsStr = m.getParameter(4);
         for (Warning w : Warning.values())
         {
             if (warningsStr.contains(w.toString()))
@@ -163,6 +155,5 @@ public class DeviceState
                 warnings.add(w);
             }
         }
-        alarmTime = m.getParameter(3);
     }
 }

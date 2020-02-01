@@ -20,7 +20,9 @@ import com.mkulesh.znet.StateManager;
 import com.mkulesh.znet.common.CustomLogger;
 import com.mkulesh.znet.common.DeviceState;
 import com.mkulesh.znet.common.DeviceState.Warning;
+import com.mkulesh.znet.common.Utils;
 
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,10 +102,19 @@ public class MessageHandler implements MessageHandlerIf
 
         logger.info(">> " + data);
 
+        // >> GW;3;7;-67;0;385;33;18
         int state = parseToken(tokens[4], data);
         boolean changed = (state == 0)? d.setAlarm(true) : d.setAlarm(false);
+        try
+        {
+            final DecimalFormat df = Utils.getDecimalFormat("0.0 V");
+            d.setBatteryState(df.format((float)Integer.parseInt(tokens[6]) / 10.0));
+        }
+        catch (Exception ex)
+        {
+            d.setBatteryState("");
+        }
 
-        d.setLastChangeTime(System.currentTimeMillis());
         changed |= d.setWarning(Warning.NO_ACTIVITY, false);
         if (changed)
         {

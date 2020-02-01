@@ -34,9 +34,6 @@
 
     <string name="warning_no_activity">No signal</string>
     <string name="warning_not_ready">Not ready</string>
-    <string name="warning_cover_opened">Cover opened</string>
-    <string name="warning_sensor_reseted">Sensor reseted</string>
     <string name="warning_low_battery">Low battery</string>
     <string name="warning_unknown_message">Unknown message</string>
-    <string name="warning_sensor_disconnected">Sensor disconnected</string>
 </resources>

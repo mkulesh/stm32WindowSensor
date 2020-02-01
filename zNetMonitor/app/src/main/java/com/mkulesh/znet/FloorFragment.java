@@ -156,7 +156,7 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
             {
                 continue;
             }
-            showToast(message, event.getX(), event.getY(), event.getY() < image.getWidth() / 2);
+            showToast(message, event.getX(), event.getY(), event.getY() < image.getWidth() / 2.0);
         }
         return false;
     }
@@ -167,49 +167,45 @@ public class FloorFragment extends BaseFragment implements OnTouchListener
         {
             return null;
         }
-        String message = "№" + d.getId();
+        StringBuilder message = new StringBuilder();
+        message.append("№").append(d.getId());
         if (!d.getAlarmTime().isEmpty())
         {
-            message += ": " + d.getAlarmTime();
+            message.append(" ").append(d.getAlarmTime());
+        }
+        if (!d.getBatteryState().isEmpty())
+        {
+            message.append(" (").append(d.getBatteryState()).append(")");
         }
         boolean firstWarning = true;
         for (DeviceState.Warning w : d.getWarnings())
         {
             if (firstWarning)
             {
-                message += ": ";
+                message.append(": ");
             }
             else
             {
-                message += ", ";
+                message.append(", ");
             }
             switch (w)
             {
             case NO_ACTIVITY:
-                message += activity.getResources().getString(R.string.warning_no_activity);
+                message.append(activity.getResources().getString(R.string.warning_no_activity));
                 break;
             case NOT_READY:
-                message += activity.getResources().getString(R.string.warning_not_ready);
-                break;
-            case COVER_OPENED:
-                message += activity.getResources().getString(R.string.warning_cover_opened);
-                break;
-            case SENSOR_RESETED:
-                message += activity.getResources().getString(R.string.warning_sensor_reseted);
+                message.append(activity.getResources().getString(R.string.warning_not_ready));
                 break;
             case LOW_BATTERY:
-                message += activity.getResources().getString(R.string.warning_low_battery);
+                message.append(activity.getResources().getString(R.string.warning_low_battery));
                 break;
             case UNKNOWN_MESSAGE:
-                message += activity.getResources().getString(R.string.warning_unknown_message);
-                break;
-            case SENSOR_DISCONNECTED:
-                message += activity.getResources().getString(R.string.warning_sensor_disconnected);
+                message.append(activity.getResources().getString(R.string.warning_unknown_message));
                 break;
             }
             firstWarning = false;
         }
-        return message;
+        return message.toString();
     }
 
     private void showToast(String message, float eventX, float eventY, boolean below)

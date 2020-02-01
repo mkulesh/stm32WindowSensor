@@ -15,6 +15,9 @@
 
 package com.mkulesh.znet.common;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 public class Utils
 {
 
@@ -31,4 +34,13 @@ public class Utils
         return result;
     }
 
+    public static DecimalFormat getDecimalFormat(String format)
+    {
+        DecimalFormat df = new DecimalFormat(format);
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        dfs.setExponentSeparator("e");
+        df.setDecimalFormatSymbols(dfs);
+        return df;
+    }
 }

@@ -22,10 +22,10 @@ public class Message
     public final static int SOCKET_BUFFER = 1024 * 4;
     public final static String START_TAG = "<message>";
     public final static String END_TAG = "</message>";
-    public final static String START_NAME = "<name>";
-    public final static String END_NAME = "</name>";
-    public final static String START_PAR = "<p>";
-    public final static String END_PAR = "</p>";
+    private final static String START_NAME = "<name>";
+    private final static String END_NAME = "</name>";
+    private final static String START_PAR = "<p>";
+    private final static String END_PAR = "</p>";
     public final static String AES_KEY = "my_aeg_key";
 
     public enum Type
@@ -34,9 +34,8 @@ public class Message
         CLIENT_LOGIN(3),
         DEVICE_CONFIG(6),
         DEVICE_NUMBER(1),
-        DEVICE_STATE(4),
-        SERVER_STATE(12),
-        BOARD_STATE(2);
+        DEVICE_STATE(5),
+        SERVER_STATE(12);
 
         private final int parNumber;
 
