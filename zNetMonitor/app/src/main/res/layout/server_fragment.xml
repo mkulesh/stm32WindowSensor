@@ -31,29 +31,72 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/dialog_field_height"
+            android:layout_height="wrap_content"
             android:baselineAligned="true"
             android:gravity="start"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/field_server_name"
+            <!-- Host name layout-->
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="text"
-                android:textSize="@dimen/dialog_field_text_size">
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_label_height"
+                    android:gravity="center_vertical|start"
+                    android:text="Host"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                <EditText
+                    android:id="@+id/field_server_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_field_height"
+                    android:inputType="text"
+                    android:textSize="@dimen/dialog_field_text_size">
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
 
-                <requestFocus />
-            </EditText>
+            <!-- Part layout-->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_label_height"
+                    android:gravity="center_vertical|start"
+                    android:text="Port"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                <EditText
+                    android:id="@+id/field_server_port"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_field_height"
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/dialog_field_text_size">
+                </EditText>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/field_server_port"
-                android:layout_width="70dp"
-                android:layout_height="fill_parent"
-                android:inputType="numberDecimal"
-                android:textSize="@dimen/dialog_field_text_size">
-            </EditText>
+            <!-- Password layout-->
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_label_height"
+                    android:gravity="center_vertical|start"
+                    android:text="Password"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                <EditText
+                    android:id="@+id/field_server_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/dialog_field_height"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/dialog_field_text_size">
+                </EditText>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_server_connect"

@@ -48,6 +48,8 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
                 ServerFragment.SERVER_NAME, "supermicro"));
         ((EditText) rootView.findViewById(R.id.field_server_port)).setText(Integer.toString(preferences.getInt(
                 ServerFragment.SERVER_PORT, 5017)));
+        ((EditText) rootView.findViewById(R.id.field_server_password)).setText(preferences.getString(
+                ServerFragment.SERVER_PASSWORD, ""));
 
         update();
         return rootView;
@@ -59,14 +61,15 @@ public class ServerFragment extends BaseFragment implements View.OnClickListener
         if (v.getId() == R.id.button_server_connect)
         {
             final String serverName = ((EditText) rootView.findViewById(R.id.field_server_name)).getText().toString();
-            final String serverPortStr = ((EditText) rootView.findViewById(R.id.field_server_port)).getText()
-                    .toString();
+            final String serverPortStr = ((EditText) rootView.findViewById(R.id.field_server_port)).getText().toString();
             final int serverPort = Integer.parseInt(serverPortStr);
-            if (activity.connectToServer(serverName, serverPort))
+            final String serverPassword = ((EditText) rootView.findViewById(R.id.field_server_password)).getText().toString();
+            if (activity.connectToServer(serverName, serverPort, serverPassword))
             {
                 SharedPreferences.Editor prefEditor = preferences.edit();
                 prefEditor.putString(SERVER_NAME, serverName);
                 prefEditor.putInt(SERVER_PORT, serverPort);
+                prefEditor.putString(SERVER_PASSWORD, serverPassword);
                 prefEditor.apply();
             }
         }

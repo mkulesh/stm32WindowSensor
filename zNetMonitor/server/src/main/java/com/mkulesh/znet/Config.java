@@ -48,7 +48,7 @@ public class Config
     private static String[] diskSpaceLabel = null;
 
     // login parameters
-    private static String[] clientAppIDs = null;
+    private static String password = null;
     private static int loginWaitingTime = 5;
 
     /**
@@ -80,7 +80,7 @@ public class Config
         // sensor configuration
         for (int i = 1; i < 256; i++)
         {
-            final String propertyValue = properties.getProperty("sensor" + Integer.toString(i));
+            final String propertyValue = properties.getProperty("sensor" + i);
             if (propertyValue == null)
             {
                 break;
@@ -108,7 +108,7 @@ public class Config
         serverSensorID = getStringListProperty(logger, properties, "serverSensorID");
 
         // login parameters
-        clientAppIDs = getStringListProperty(logger, properties, "clientAppIDs");
+        password = getStringProperty(logger, properties, "password", "");
         loginWaitingTime = getIntProperty(logger, properties, "loginWaitingTime", loginWaitingTime);
     }
 
@@ -210,9 +210,9 @@ public class Config
         return serverSensorID;
     }
 
-    public static String[] getClientAppIDs()
+    public static String getPassword()
     {
-        return clientAppIDs;
+        return password;
     }
 
     public static int getLoginWaitingTime()

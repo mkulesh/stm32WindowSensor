@@ -39,6 +39,7 @@ abstract public class BaseFragment extends Fragment
     static final String FRAGMENT_NUMBER = "fragment_number";
     static final String SERVER_NAME = "server_name";
     static final String SERVER_PORT = "server_port";
+    static final String SERVER_PASSWORD = "server_password";
 
     MainActivity activity;
     SharedPreferences preferences;
@@ -66,7 +67,7 @@ abstract public class BaseFragment extends Fragment
     @SuppressLint("SetTextI18n")
     public void update()
     {
-        Drawable icon1 = null, icon2 = null;
+        Drawable icon1, icon2 = null;
         String text1 = preferences.getString(ServerFragment.SERVER_NAME, "");
         String text2 = "";
 

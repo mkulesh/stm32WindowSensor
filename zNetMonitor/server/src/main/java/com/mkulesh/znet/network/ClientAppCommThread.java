@@ -182,19 +182,15 @@ public class ClientAppCommThread implements Runnable
         sessionEncryptor = null;
         if (inputMessage.getType() == Type.CLIENT_LOGIN)
         {
-            final String imei = inputMessage.getParameter(1);
+            final String password = inputMessage.getParameter(1);
             final String sessionKey = inputMessage.getParameter(2);
-            for (String allowedImei : Config.getClientAppIDs())
+            if (Config.getPassword().equals(password))
             {
-                if (imei != null && allowedImei.equals(imei))
-                {
-                    logger.info("access for client with IMEI " + imei + " granted with key " + sessionKey);
-                    sessionEncryptor = new AdvancedEncryptionStandard(sessionKey);
-                    return true;
-                }
-
+                logger.info("access for client granted with key " + sessionKey);
+                sessionEncryptor = new AdvancedEncryptionStandard(sessionKey);
+                return true;
             }
-            logger.info("access denied due to invalid IMEI " + imei);
+            logger.info("access denied due to invalid password " + password);
             return false;
         }
         logger.info("access denied due to invalid message");

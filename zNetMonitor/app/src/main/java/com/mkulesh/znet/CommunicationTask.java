@@ -16,10 +16,8 @@
 package com.mkulesh.znet;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
-import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.widget.Toast;
 
@@ -49,6 +47,7 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
     private final AtomicBoolean connected = new AtomicBoolean(false);
     private Boolean reportIfStopped = false;
     private SocketChannel socket = null;
+    private String password = "";
     private String inputStream = "";
     private final AdvancedEncryptionStandard initialEncryptor = new AdvancedEncryptionStandard(Message.AES_KEY);
     private AdvancedEncryptionStandard sessionEncryptor = null;
@@ -60,9 +59,10 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
         StrictMode.setThreadPolicy(policy);
     }
 
-    boolean connectToServer(String server, int port)
+    boolean connectToServer(String server, int port, String password)
     {
         final String addr = server + ":" + port;
+        this.password = password;
         try
         {
             socket = SocketChannel.open();
@@ -162,9 +162,7 @@ class CommunicationTask extends AsyncTask<Void, Message, Void>
     {
         Message clientLogin = new Message(Type.CLIENT_LOGIN);
         clientLogin.addParameter(android.os.Build.MODEL);
-
-        TelephonyManager telephonyManager = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
-        clientLogin.addParameter(telephonyManager.getDeviceId());
+        clientLogin.addParameter(password);
 
         try
         {

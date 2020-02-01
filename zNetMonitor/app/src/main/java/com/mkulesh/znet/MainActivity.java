@@ -89,7 +89,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
         return super.onOptionsItemSelected(item);
     }
 
-    public boolean connectToServer(String server, int port)
+    public boolean connectToServer(String server, int port, String password)
     {
         boolean res = false;
         if (communicationThread != null)
@@ -97,7 +97,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
             communicationThread.disconnect();
         }
         communicationThread = new CommunicationTask(this);
-        if (communicationThread.connectToServer(server, port))
+        if (communicationThread.connectToServer(server, port, password))
         {
             communicationThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
             res = true;
@@ -113,9 +113,10 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final String serverName = preferences.getString(ServerFragment.SERVER_NAME, "");
         final int serverPort = preferences.getInt(ServerFragment.SERVER_PORT, 0);
+        final String serverPassword = preferences.getString(ServerFragment.SERVER_PASSWORD, "");
         if (!serverName.isEmpty() && serverPort > 0)
         {
-            connectToServer(serverName, serverPort);
+            connectToServer(serverName, serverPort, serverPassword);
         }
     }
 
