@@ -31,5 +31,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="common" exported="" />
     <orderEntry type="library" exported="" name="Gradle: RXTXcomm" level="project" />
+    <orderEntry type="module" module-name="common" exported="" />
   </component>
 </module>
