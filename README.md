@@ -23,7 +23,7 @@ This is a DIY windows monitorig system that consist of:
 
 This software is published under the *GNU General Public License, Version 3*
 
-Copyright © 2018-2019 by Mikhail Kulesh, Alexander Gomanyuk
+Copyright © 2018-2019 by Mikhail Kulesh
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as
 published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
