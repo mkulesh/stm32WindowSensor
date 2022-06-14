@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/license-GNU_GPLv3-orange.svg)](https://github.com/mkulesh/onpc/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-GNU_GPLv3-orange.svg)](https://github.com/mkulesh/stm32WindowSensor/blob/master/LICENSE)
 
 # stm32WindowSensor
 
